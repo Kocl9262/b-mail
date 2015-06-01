@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Mail - {{ user }}{% endblock title %}
+
+{% block content %}
+
+
+<div class="container">
+
+    {% if logged_in %}
+
+        <div class="background">
+            <div class="mail-position">
+                <h1>{{ mail.subject }}<span class="date_span">{{ mail.created.strftime("%d.%m.%Y at %H:%M") }}</span></h1>
+                <br>
+                <p>From: {{ mail.from_user }}</p>
+                <p>To: {{ mail.to }}</p>
+                <br>
+                <br>
+                <br>
+                <p>{{ mail.msg }}</p>
+
+
+    {% else %}
+
+        <h1>Please login</h1>
+
+    {% endif %}
+
+</div>
+
+{% endblock content %}
