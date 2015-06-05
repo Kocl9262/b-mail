@@ -78,6 +78,9 @@ class MailSent(BaseHandler):
         if from_user.find("@gmail.com") != -1:
             from_user = from_user.replace("@gmail.com", "")
 
+        if subject == "":
+            subject = "No subject"
+
         mail = Bmail(to=to, subject=subject, msg=msg, from_user=from_user)
         mail.put()
 
