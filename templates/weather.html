@@ -16,7 +16,6 @@
 
         <div class="background">
             <div class="mail-position">
-
                 <p>Town: {{ weather.name }}</p>
                 <p>Temp (°C): {{ weather.main.temp }}</p>
                 <p>Description: {{ weather.weather[0].description }}</p>
@@ -27,7 +26,7 @@
 
         {% else %}
 
-            <h1>Please login</h1>
+            <center><h1>Please login</h1></center>
 
         {% endif %}
 

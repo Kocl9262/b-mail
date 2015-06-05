@@ -11,19 +11,19 @@
 
         <div class="background">
             <div class="mail-position">
-                <h1>{{ mail.subject }}<span class="date_span">{{ mail.created.strftime("%d.%m.%Y at %H:%M") }}</span></h1>
+                <h1 class="border-line">{{ mail.subject }}<span class="date_span">{{ mail.created.strftime("%d.%m.%Y at %H:%M") }}</span></h1>
                 <br>
                 <p>From: {{ mail.from_user }}</p>
                 <p>To: {{ mail.to }}</p>
-                <br>
-                <br>
+                <div class="border-line"></div>
                 <br>
                 <p>{{ mail.msg }}</p>
-
+            </div>
+        </div>
 
     {% else %}
 
-        <h1>Please login</h1>
+        <center><h1>Please login</h1></center>
 
     {% endif %}
 

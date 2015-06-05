@@ -1,5 +1,5 @@
 body {
-    background-color: lightblue;
+    background-image: url("/assets/images/background.jpg")
 }
 label {
     display:block;
@@ -39,4 +39,7 @@ label {
 .date_span {
     float: right;
     font-size: 15px;
+}
+.border-line {
+    border-bottom: 1px solid #B3B3B3;
 }

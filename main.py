@@ -48,13 +48,17 @@ class BaseHandler(webapp2.RequestHandler):
 
 class MainHandler(BaseHandler):
     def get(self):
-        current_user = str(users.get_current_user())
-        bmail = Bmail.query(Bmail.to == current_user).order(-Bmail.created).fetch()
+        current_user = users.get_current_user()
 
-        params = {"bmail": bmail}
+        if current_user:
+            bmail = Bmail.query(Bmail.to == current_user.nickname()).order(-Bmail.created).fetch()
 
-        self.render_template("index.html", params)
+            params = {"bmail": bmail}
 
+            self.render_template("index.html", params)
+
+        else:
+            return self.render_template("index.html")
 
 class SendMail(BaseHandler):
     def get(self):
@@ -68,6 +72,12 @@ class MailSent(BaseHandler):
         msg = self.request.get("msg")
         from_user = str(users.get_current_user())
 
+        if to.find("@gmail.com") != -1:
+            to = to.replace("@gmail.com", "")
+
+        if from_user.find("@gmail.com") != -1:
+            from_user = from_user.replace("@gmail.com", "")
+
         mail = Bmail(to=to, subject=subject, msg=msg, from_user=from_user)
         mail.put()
 
@@ -76,12 +86,17 @@ class MailSent(BaseHandler):
 
 class SentHandler(BaseHandler):
     def get(self):
-        current_user = str(users.get_current_user())
-        bmail = Bmail.query(Bmail.from_user == current_user).order(-Bmail.created).fetch()
+        current_user = users.get_current_user()
 
-        params = {"bmail": bmail}
+        if current_user:
+            bmail = Bmail.query(Bmail.from_user == current_user.nickname()).order(-Bmail.created).fetch()
 
-        self.render_template("sent.html", params)
+            params = {"bmail": bmail}
+
+            self.render_template("sent.html", params)
+
+        else:
+            return self.render_template("sent.html")
 
 
 class MailHandler(BaseHandler):
@@ -95,7 +110,7 @@ class MailHandler(BaseHandler):
 
 class WeatherHandler(BaseHandler):
     def get(self):
-        url = "http://api.openweathermap.org/data/2.5/weather?q=Ljubljana,si&units=metric"
+        url = "http://api.openweathermap.org/data/2.5/weather?q=ljubljana,si&units=metric"
 
         url_content = urlfetch.fetch(url).content
         weather = json.loads(url_content)
@@ -110,5 +125,5 @@ app = webapp2.WSGIApplication([
     webapp2.Route('/mailsent', MailSent),
     webapp2.Route('/sent', SentHandler),
     webapp2.Route('/mail/<mail_id:\d+>', MailHandler),
-    webapp2.Route('/weather', WeatherHandler),
+    webapp2.Route('/weather', WeatherHandler, name="weather"),
 ], debug=True)
