@@ -9,6 +9,8 @@
 
     {% if logged_in %}
 
+        <a href="/mail/{{ mail.key.id() }}/reply"><button>Reply</button></a>
+        <p></p>
         <div class="background">
             <div class="mail-position">
                 <h1>{{ mail.subject }}<span class="date_span">{{ mail.created.strftime("%d.%m.%Y at %H:%M") }}</span></h1>

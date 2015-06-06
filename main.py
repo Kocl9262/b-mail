@@ -81,6 +81,9 @@ class MailSent(BaseHandler):
         if subject == "":
             subject = "No subject"
 
+        if subject.find("Re: Re:") != -1:
+            subject = subject.replace("Re: Re:", "Re:")
+
         to = to.lower()
         from_user = from_user.lower()
 
@@ -88,6 +91,15 @@ class MailSent(BaseHandler):
         mail.put()
 
         self.render_template("mail_sent.html")
+
+
+class ReplyHandler(BaseHandler):
+    def get(self, mail_id):
+        mail = Bmail.get_by_id(int(mail_id))
+
+        params = {"mail": mail}
+
+        self.render_template("reply.html", params)
 
 
 class SentHandler(BaseHandler):
@@ -131,5 +143,6 @@ app = webapp2.WSGIApplication([
     webapp2.Route('/mailsent', MailSent),
     webapp2.Route('/sent', SentHandler),
     webapp2.Route('/mail/<mail_id:\d+>', MailHandler),
+    webapp2.Route('/mail/<mail_id:\d+>/reply', ReplyHandler),
     webapp2.Route('/weather', WeatherHandler, name="weather"),
 ], debug=True)
