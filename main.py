@@ -81,6 +81,9 @@ class MailSent(BaseHandler):
         if subject == "":
             subject = "No subject"
 
+        to = to.lower()
+        from_user = from_user.lower()
+
         mail = Bmail(to=to, subject=subject, msg=msg, from_user=from_user)
         mail.put()
 
