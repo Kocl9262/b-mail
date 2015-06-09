@@ -125,6 +125,14 @@ class MailHandler(BaseHandler):
 
         self.render_template("mail.html", params)
 
+    def post(self, mail_id):
+        mail = Bmail.get_by_id(int(mail_id))
+
+        mail.read = True
+        mail.put()
+        return self.redirect_to("home")
+
+
 
 class WeatherHandler(BaseHandler):
     def get(self):
@@ -138,11 +146,11 @@ class WeatherHandler(BaseHandler):
         self.render_template("weather.html", params)
 
 app = webapp2.WSGIApplication([
-    webapp2.Route('/', MainHandler),
+    webapp2.Route('/', MainHandler, name="home"),
     webapp2.Route('/send', SendMail),
     webapp2.Route('/mailsent', MailSent),
     webapp2.Route('/sent', SentHandler),
-    webapp2.Route('/mail/<mail_id:\d+>', MailHandler),
+    webapp2.Route('/mail/<mail_id:\d+>', MailHandler, name="mail"),
     webapp2.Route('/mail/<mail_id:\d+>/reply', ReplyHandler),
     webapp2.Route('/weather', WeatherHandler, name="weather"),
 ], debug=True)

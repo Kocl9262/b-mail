@@ -1,14 +1,6 @@
 body {
-    background-image: url("/assets/images/background.jpg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+    background-image: url("/assets/images/background.jpg")
 }
-
 label {
     display:block;
     float:left;
@@ -50,4 +42,13 @@ label {
 }
 .border-line {
     border-bottom: 1px solid #B3B3B3;
+}
+.inline-button {
+    display: inline-block;
+}
+.True {
+    background-color: inherit;
+}
+.False {
+    background-color: #CCCCCC;
 }

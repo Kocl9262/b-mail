@@ -8,9 +8,17 @@
 <div class="container">
 
     {% if logged_in %}
+        <div class="inline-button">
+            <a href="/mail/{{ mail.key.id() }}/reply"><button>Reply</button></a>
+        </div>
+        <div class="inline-button">
+            <form method="post" action="/mail/{{ mail.key.id() }}">
+                <a><button>Mark as read</button></a>
+            </form>
+        </div>
 
-        <a href="/mail/{{ mail.key.id() }}/reply"><button>Reply</button></a>
         <p></p>
+
         <div class="background">
             <div class="mail-position">
                 <h1>{{ mail.subject }}<span class="date_span">{{ mail.created.strftime("%d.%m.%Y at %H:%M") }}</span></h1>

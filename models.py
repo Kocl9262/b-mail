@@ -6,3 +6,4 @@ class Bmail(ndb.Model):
     subject = ndb.StringProperty()
     msg = ndb.TextProperty()
     from_user = ndb.StringProperty()
+    read = ndb.BooleanProperty(default=False)

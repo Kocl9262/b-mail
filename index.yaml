@@ -18,6 +18,12 @@ indexes:
 
 - kind: Bmail
   properties:
+  - name: read
+  - name: created
+    direction: desc
+
+- kind: Bmail
+  properties:
   - name: to
   - name: created
     direction: desc

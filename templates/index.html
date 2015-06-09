@@ -14,9 +14,8 @@
             <h1>Inbox</h1>
             <div class="mail-margin-top">
                 {% for mail in bmail %}
-
                     <div class="panel panel-default mail-margin">
-                      <div class="panel-body mail-hover">
+                      <div class="panel-body mail-hover {{ mail.read }}">
                           From: {{ mail.from_user }}
                           &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="/mail/{{ mail.key.id() }}">{{ mail.subject }}</a>
                           <span class="text-right">{{ mail.created.strftime("%d.%m.%Y") }}</span>
