@@ -11,7 +11,7 @@
         <div class="inline-button">
             <a href="/mail/{{ mail.key.id() }}/reply"><button>Reply</button></a>
         </div>
-        {% if mail.from_user != user.nickname() %}
+        {% if mail.from_user != user.nickname() and mail.read == False %}
             <div class="inline-button">
                 <form method="post" action="/mail/{{ mail.key.id() }}">
                     <a><button>Mark as read</button></a>
