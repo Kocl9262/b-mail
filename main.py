@@ -70,7 +70,7 @@ class MailSent(BaseHandler):
         to = self.request.get("to")
         subject = self.request.get("subject")
         msg = self.request.get("msg")
-        from_user = str(users.get_current_user())
+        from_user = users.get_current_user()
 
         if to.find("@gmail.com") != -1:
             to = to.replace("@gmail.com", "")
